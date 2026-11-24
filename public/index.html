@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#136c50">
+    <title>EcoFinanças | Planejamento Sustentável</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <header>
+        <div>
+            <div class="brand">EcoFinanças <small>Planejamento Financeiro Sustentável</small></div>
+            <nav class="nav"><button class="active" data-jump="app">▣ Dashboard</button><button
+                    data-jump="transactions">☷ Transações</button><button data-jump="goalsSection">◎
+                    Metas</button><button data-jump="tipsSection">♻ Consumo Consciente</button></nav>
+        </div>
+        <div id="account" hidden><span id="username"></span> <button class="ghost" id="logout">Sair</button></div>
+    </header>
+    <main>
+        <section id="auth" class="auth-card">
+            <h1>Organize suas finanças. Cuide do futuro.</h1>
+            <p>Controle seus gastos, alcance metas e consuma de forma consciente.</p>
+            <div class="tabs"><button id="loginTab" class="active">Entrar</button><button id="registerTab">Criar
+                    conta</button></div>
+            <form id="authForm"><label id="nameLabel" hidden>Nome<input id="name" autocomplete="name"
+                        maxlength="80"></label><label>E-mail<input id="email" type="email" autocomplete="email"
+                        required></label><label>Senha<input id="password" type="password" minlength="8" required
+                        autocomplete="current-password"></label><button class="primary" id="authSubmit">Entrar</button>
+            </form>
+        </section>
+        <section id="app" hidden>
+            <div class="heading">
+                <div>
+                    <h1>Olá! 👋</h1>
+                    <p>Veja um resumo das suas finanças e do seu impacto sustentável.</p>
+                </div><label class="month-label">Mês de referência<input id="month" type="month"></label>
+            </div>
+            <div class="stats">
+                <article class="stat"><span>Receitas</span><strong id="income">R$ 0,00</strong></article>
+                <article class="stat"><span>Despesas</span><strong id="expense">R$ 0,00</strong></article>
+                <article class="stat"><span>Saldo do mês</span><strong id="balance">R$ 0,00</strong></article>
+                <article class="stat"><span>Taxa de economia</span><strong id="rate">—</strong></article>
+            </div>
+            <div class="dashboard-grid">
+                <section class="panel">
+                    <h2>◫ Despesas por categoria</h2>
+                    <div id="categoryChart" class="chart"></div>
+                </section>
+                <section class="panel">
+                    <h2>↗ Evolução financeira</h2>
+                    <p class="hint">Comparativo ilustrativo do mês selecionado</p>
+                    <div id="trendChart" class="trend"></div>
+                </section>
+            </div>
+            <div class="layout">
+                <section class="panel">
+                    <h2 id="txTitle">Novo lançamento</h2>
+                    <form id="txForm"><input type="hidden" id="txId">
+                        <div class="two"><label>Tipo<select id="type">
+                                    <option value="expense">Despesa</option>
+                                    <option value="income">Receita</option>
+                                </select></label><label>Valor (R$)<input id="amount" type="number" min="0.01"
+                                    max="1000000000" step="0.01" required></label></div><label>Descrição<input
+                                id="description" maxlength="120" placeholder="Ex.: Compra no mercado" required></label>
+                        <div class="two"><label>Categoria<select id="category"></select></label><label>Data<input
+                                    id="date" type="date" required></label></div>
+                        <div class="actions"><button class="primary">Salvar lançamento</button><button type="button"
+                                class="ghost" id="cancelTx" hidden>Cancelar edição</button></div>
+                    </form>
+                </section>
+                <section class="panel" id="tipsSection">
+                    <h2>🌎 Consumo consciente e bem-estar</h2>
+                    <div id="wellbeing" class="wellbeing"></div>
+                    <h3>Recomendações práticas</h3>
+                    <ul id="tips"></ul>
+                </section>
+            </div>
+            <section class="panel" id="transactions">
+                <div class="section-head">
+                    <h2>Lançamentos do mês</h2><span id="txCount" class="muted"></span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="txRows"></tbody>
+                    </table>
+                </div>
+            </section>
+            <div class="layout">
+                <section class="panel" id="goalsSection">
+                    <h2 id="goalTitle">Metas financeiras</h2>
+                    <form id="goalForm"><input type="hidden" id="goalId"><label>Objetivo<input id="goalName"
+                                maxlength="100" placeholder="Ex.: Reserva de emergência" required></label>
+                        <div class="two"><label>Valor desejado (R$)<input id="target" type="number" min="0.01"
+                                    step="0.01" required></label><label>Valor já guardado (R$)<input id="saved"
+                                    type="number" min="0" step="0.01" value="0" required></label></div>
+                        <div class="actions"><button class="primary">Salvar meta</button><button type="button"
+                                class="ghost" id="cancelGoal" hidden>Cancelar edição</button></div>
+                    </form>
+                    <div id="goals" class="goals"></div>
+                </section>
+                <section class="panel">
+                    <h2>🌱 Seu progresso sustentável</h2>
+                    <div class="mini-card"><strong>Consumo consciente</strong>
+                        <p>Planeje compras, reutilize e evite desperdícios.</p>
+                    </div>
+                    <div class="mini-card"><strong>Qualidade de vida</strong>
+                        <p>Organize seu orçamento e suas prioridades.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <footer>Projeto Integrador ADS EAD • Módulo 1 • EcoFinanças</footer>
+    <script src="/app.js" defer></script>
+</body>
+
+</html>
